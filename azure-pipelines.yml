@@ -19,7 +19,7 @@ steps:
 - task: NodeTool@0 
   inputs:
     versionSource: 'spec'
-    versionSpec: '12'
+    versionSpec: '12.18'
 
 - task: NuGetCommand@2
   inputs:

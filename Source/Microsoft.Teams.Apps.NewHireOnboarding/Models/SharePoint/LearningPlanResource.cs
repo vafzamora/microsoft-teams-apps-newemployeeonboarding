@@ -14,13 +14,13 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Models.SharePoint
         /// <summary>
         /// Gets or sets description of resource link.
         /// </summary>
-        [JsonProperty("Description")]
+        [JsonProperty(nameof(Description))]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets Url of resource.
         /// </summary>
-        [JsonProperty("Url")]
+        [JsonProperty(nameof(Url))]
         public string Url { get; set; }
     }
 }

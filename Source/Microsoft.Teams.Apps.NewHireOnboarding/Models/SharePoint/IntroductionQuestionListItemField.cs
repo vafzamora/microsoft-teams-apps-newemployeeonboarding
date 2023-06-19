@@ -14,7 +14,7 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Models.SharePoint
         /// <summary>
         /// Gets or sets question of the list item.
         /// </summary>
-        [JsonProperty("Question")]
+        [JsonProperty(nameof(Question))]
         public string Question { get; set; }
 
         /// <summary>

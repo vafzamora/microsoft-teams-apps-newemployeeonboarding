@@ -14,7 +14,7 @@ namespace Microsoft.Teams.Apps.NewHireOnboarding.Models.SharePoint
         /// <summary>
         /// Gets or sets Url of task image.
         /// </summary>
-        [JsonProperty("Url")]
+        [JsonProperty(nameof(Url))]
         public string Url { get; set; }
     }
 }

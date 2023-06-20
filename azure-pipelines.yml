@@ -16,14 +16,15 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
-- task: NodeTool@0 
-  inputs:
-    versionSource: 'spec'
-    versionSpec: '12.18'
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- task: NodeTool@0 
+  inputs:
+    versionSource: 'spec'
+    versionSpec: '16'
 
 - task: VSBuild@1
   inputs:

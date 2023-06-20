@@ -2,6 +2,10 @@
   "name": "newhireonboarding",
   "version": "1.0.0",
   "private": true,
+  "engines":{
+    "noode": "14.x",
+    "npm": "6.x"
+  },
   "dependencies": {
     "@fluentui/react": "^7.115.4",
     "@fluentui/react-northstar": "^0.51.0",

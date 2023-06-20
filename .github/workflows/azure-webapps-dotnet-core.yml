@@ -21,7 +21,8 @@ name: Build and deploy New Hire Onboarding App
 
 env:
   AZURE_WEBAPP_NAME: 'vz-onboarding-teste'    # set this to the name of your Azure Web App
-  AZURE_WEBAPP_PACKAGE_PATH: './Source/Microsoft.Teams.Apps.NewHireOnboarding/Microsoft.Teams.Apps.NewHireOnboarding.csproj'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_WEBAPP_PACKAGE_PATH: './webapp'      # set this to the path to your web app project, defaults to the repository root
+  PROJECT_FILE_PATH: './Source/Microsoft.Teams.Apps.NewHireOnboarding/Microsoft.Teams.Apps.NewHireOnboarding.csproj'
   DOTNET_VERSION: '6.0'                 # set this to the .NET Core version to use
   CI: false
 
@@ -62,16 +63,16 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Build with dotnet
-        run: dotnet build ${{env.AZURE_WEBAPP_PACKAGE_PATH}} --configuration Release
+        run: dotnet build ${{env.PROJECT_FILE_PATH}} --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish ${{env.AZURE_WEBAPP_PACKAGE_PATH}} -c Release -o ${{env.DOTNET_ROOT}}/webapp
+        run: dotnet publish ${{env.PROJECT_FILE_PATH}} -c Release -o ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/webapp
+          path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
 
   deploy:
     permissions:
@@ -87,6 +88,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
+          path: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -94,4 +96,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
